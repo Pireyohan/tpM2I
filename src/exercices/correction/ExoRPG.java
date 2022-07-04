@@ -20,7 +20,8 @@ public class ExoRPG {
         // Personnage[] monstres = new Personnage[2]; // on crée un tableau avec deux
         // cases
 
-        //ArrayList<PotionSoin> listPotion = new ArrayList<PotionSoin>(); // Faire une liste de potion pour l'inventaire
+        //ArrayList<PotionSoin> listPotion = new ArrayList<PotionSoin>(); // Faire une liste de potion pour l'inventaire check
+        
 
         link.setPv(100);
         link.setForce(10);
