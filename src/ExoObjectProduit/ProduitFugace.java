@@ -29,13 +29,13 @@
 
 //     @Override
 //     public void setRemise(int remise) {
-//         // TODO Auto-generated method stub
+//         
 //         this.remise =remise;
 //     }
 
 //     @Override
 //     public int getRemise() {
-//         // TODO Auto-generated method stub
+//         
 //         return remise;
 //     }
 

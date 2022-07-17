@@ -1,27 +1,42 @@
 package src.exercices.correction;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
-import org.checkerframework.common.returnsreceiver.qual.This;
-
 public class ExoRPG {
-    static BasicItem[] availableItems = new BasicItem[10];
-    static Arme[] availableWeapons = new Arme[9];
-    static Armure[] availableArmors = new Armure[9];
+    static BasicItem[] availableItems = new BasicItem[5];
+    static Arme[] availableWeapons = new Arme[10];
+    static Armure[] availableArmors = new Armure[10];
 
-    static Personnage[] monsters = new Personnage[5];
+    static Personnage[] monsters = new Personnage[10];
     static Scanner scan;
 
     public static void main(String[] args) {
+
+        Connection conn = null;
+        String user = "M2I";
+        String password = "H3ll0M2I";
+        String database = "bddYohan";
+        int port = 3306;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://51.68.227.19:" + port + "/" + database, user, password);
+
+            // do somthing
+
+        } catch (SQLException ex) {
+            System.out.println("SQLException" + ex.getMessage());
+            System.out.println("SQLState" + ex.getSQLState());
+            System.out.println("VendorError" + ex.getErrorCode());
+        }
 
         Personnage link = new Personnage("Link");
         // Personnage[] monstres = new Personnage[2]; // on crée un tableau avec deux
         // cases
 
-        //ArrayList<PotionSoin> listPotion = new ArrayList<PotionSoin>(); // Faire une liste de potion pour l'inventaire check
-        
+        // ArrayList<PotionSoin> listPotion = new ArrayList<PotionSoin>(); // Faire une
+        // liste de potion pour l'inventaire check
 
         link.setPv(100);
         link.setForce(10);
@@ -92,7 +107,7 @@ public class ExoRPG {
             }
         }
         System.out.println(link + " est mort , vous avez perdu ");
-
+        selection.close();
     }
 
     public static void combattre(Personnage p1, Personnage p2) {
@@ -117,7 +132,7 @@ public class ExoRPG {
                             }
                             j++;
                         }
-                        // TODO gÃ©rer Ã§a mieux
+
                         if (nbPotions == 0)
                             p1.attaquer(p2);
                         else {
@@ -140,6 +155,7 @@ public class ExoRPG {
         }
 
         System.out.println("Le vainqueur est : " + ((p1.getPv() > 0) ? p1 : p2));
+
     }
 
     public static BasicItem[] initInventaire() {
@@ -179,6 +195,7 @@ public class ExoRPG {
             availableWeapons[i].setDegats((int) Math.random() * 5 * (i + 1));
             availableWeapons[i].setCritique((float) Math.random() * 5 * (i + 1) / 100);
         }
+
     }
 
     // Affichage pour donner le vainqueur du combat

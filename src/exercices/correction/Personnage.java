@@ -1,8 +1,7 @@
 package src.exercices.correction;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Personnage {
     protected static Arme poings = new Arme("Poings", 1 , 0.01f);
@@ -79,8 +78,8 @@ public class Personnage {
         return equipedWeapon;
     }
 
-    public void setEquipedWeapon(Arme[] availableWeapons) {
-        this.equipedWeapon = availableWeapons;
+    public void setEquipedWeapon(Arme equipedWeapons) {
+        this.equipedWeapon = equipedWeapons;
     }
     //#endregion
 
