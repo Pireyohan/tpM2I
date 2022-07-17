@@ -5,68 +5,46 @@ import java.util.Scanner;
 public class projetCh1 {
 
     public static void main(String[] args) {
-
-        // Variables
-        byte choix;
-        char typeCpte = '\0';
-        double val_courante = 0.0, taux = 0.0;
-        long numeroCpte = 0, numeroLu = 0;
-        Scanner scan = new Scanner(System.in);
-
+        byte choix = 0;
+        String numeroLu = "";
+        Compte C = new Compte();
+        Scanner lectureClavier = new Scanner(System.in);
         do {
             choix = menuPrincipal();
             switch (choix) {
                 case 1:
-                    do {
-                        // Option 1
-                        System.out.println("Types possible de comptes:");
-                        System.out.println("C(courant), J(oint),E(pargne) ");
-                        typeCpte = scan.next().charAt(0);
-                    } while (typeCpte != 'C' && typeCpte != 'J' && typeCpte != 'E'); // Permet d'identifier la lettre
-                                                                                     // rentré
-                                                                                     // au clavier
-                    System.out.print("Numero du compte :");
-                    numeroCpte = scan.nextLong();
-                    System.out.print("Premiere valeur creditee  :");
-                    val_courante = scan.nextDouble();
-                    // Si compte épargne
-                    if (typeCpte == 'E') {
-                        System.out.print("Taux de placement :     ");
-                        taux = scan.nextDouble();
-                    }
+                    C.creerCpte();
                     break;
                 case 2:
-                    // Option 2
-                    System.out.println("Quel compte souhaitez vous afficher");
-                    numeroLu = scan.nextLong();
-                    if (numeroLu == numeroCpte) {
-                        afficherCpte(numeroCpte, typeCpte, taux, val_courante);
-                    } else {
-                        // Sinon il affiche qu'il ne connait pas ce compte
-                        System.out.println("Le système ne connait pas le compte " + numeroLu);
-                    }
+                    // demande à l'utilisateur de saisir le numero du compte à afficher
+                    System.out.print("Quel compte souhaitez vous afficher ? : ");
+                    numeroLu = lectureClavier.next();
+                    // verifie que le numero du compte existe,
+                    if (numeroLu.equalsIgnoreCase(C.numeroCpte))
+                        C.afficherCpte();
+                    else
+                        System.out.println("Le systeme ne connait pas le compte " + numeroLu);
                     break;
-
                 case 3:
-                    // Option3 option non programmée
-                    System.out.println("option non programmée");
+                    // option 3, creer une ligne comptable
+                    System.out.print("Pour quel compte souhaitez vous creer une ligne ? : ");
+                    numeroLu = lectureClavier.next();
+                    if (numeroLu.equalsIgnoreCase(C.numeroCpte))
+                        C.creerLigne();
+                    else
+                        System.out.println("Le systeme ne connait pas le compte " + numeroLu);
                     break;
-
                 case 4:
-                    // Option4 le programme termine son exécution
+                    // option 4, le programme termine son execution
                     sortir();
                     break;
-
                 case 5:
-                    // Option 5 le programme affiche une ligne d'explication pour chaque option
                     alAide();
                     break;
                 default:
-                    System.out.println("Cette option n'existe pas");
-
+                    System.out.println("Cette option n'existe pas ");
             }
         } while (choix != 4);
-
     }
 
     public static byte menuPrincipal() {
@@ -82,6 +60,7 @@ public class projetCh1 {
         System.out.println("Votre choix: ");
         tmp = scan.nextByte();
         return tmp;
+
     }
 
     public static void sortir() {
@@ -118,4 +97,5 @@ public class projetCh1 {
         System.out.println("Premiere valeure creditée" + val);
 
     }
+
 }
